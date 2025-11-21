@@ -14,7 +14,7 @@ const buttonsBgVariant = {
 export default function Button({ variant, text, startIcon, onClick }: ButtonProps) {
 	return (
 		<button
-			className={buttonsBgVariant[variant] + " px-4 py-2 rounded-md font-light flex gap-2 items-center cursor-pointer"}
+			className={buttonsBgVariant[variant] + " px-4 py-2 rounded-md font-light flex gap-2 items-center cursor-pointer text-black"}
 			onClick={() => onClick()}>
 			{startIcon}
 			<div>{text}</div>

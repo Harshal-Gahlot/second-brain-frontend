@@ -9,7 +9,7 @@ export interface CardType {
 const commonTopBarClass = "flex items-center justify-between text-gray-500 p-4";
 export default function Card({ title, link, type }: CardType) {
     return (
-        <div className="bg-white rounded-md outline-1 outline-gray-200 w-84 min-h-60 max-h-fit overflow-hidden">
+        <div className="bg-slate-900 rounded-md outline-1 outline-gray-200 w-84 min-h-60 max-h-fit overflow-hidden">
             <div
                 className={
                     type === "twitter"
@@ -19,7 +19,7 @@ export default function Card({ title, link, type }: CardType) {
             >
                 <div className="flex items-center gap-2">
                     <ShareIcon />
-                    <p className="text-black">{title}</p>
+                    <p className="text-white">{title}</p>
                 </div>
                 <div className="flex items-center gap-4">
                     <ShareIcon />
