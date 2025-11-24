@@ -1,4 +1,5 @@
 import CrossIcon from "../../icons/CrossIcon";
+import Input from "../inputComponent";
 import Button from "./Button";
 
 interface CreateModelType {
@@ -11,7 +12,7 @@ export default function CreateModel({ open, onClose }: CreateModelType) {
 		<div>
 			{open && (
 				<div className="w-full h-screen bg-black/60 fixed top-0 left-0 flex justify-center ">
-					<span className="bg-white absolute opacity-100 top-[50%] -translate-y-[50%] w-96 h-96 rounded-2xl">
+					<span className="bg-slate-600 absolute opacity-100 top-[50%] -translate-y-[50%] w-96 h-96 rounded-2xl">
 						<div className="flex justify-end p-1 cursor-pointer" onClick={() => onClose()}>
 							<CrossIcon />
 						</div>
@@ -24,21 +25,6 @@ export default function CreateModel({ open, onClose }: CreateModelType) {
 					</span>
 				</div>
 			)}
-		</div>
-	);
-}
-interface InputType { 
-    onChange?: () => void;
-    placeholder: string;
-}
-function Input({ onChange, placeholder }:InputType) {
-	return (
-		<div>
-			<input
-				placeholder={placeholder}
-				type="text"
-				className="px-4 py-2 border rounded-md m-2"
-				onChange={onChange}></input>
 		</div>
 	);
 }
