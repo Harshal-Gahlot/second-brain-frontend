@@ -5,9 +5,37 @@ import ShareIcon from "../icons/shareicon";
 import CreateModel from "../components/top bar/model";
 import { useState } from "react";
 import SideBar from "../components/side bar/Sidebar";
-// todo: add hover effect to all buttons
+import useContent from "../hooks/useContent";
+import axios from "axios";
+import { BACKEND_LINK } from "../config";
+// todo: add hover effect to all buttonsO
+
 export default function Dashboard() {
 	const [modelOpen, setModelOpen] = useState(false);
+	const [brainShared, setBrainShared] = useState(false);
+	const [shareBrainText, setSharedBrainText] = useState("make brain private");
+	const contents = useContent();
+
+	async function getURL() {
+		try {
+			const res = await axios.post(
+				`${BACKEND_LINK}/share`,
+				{ share: true },
+				{
+					headers: { authorization: localStorage.getItem("jwt") },
+				}
+			);
+			const shareUrl = `${BACKEND_LINK}/brain/${res.data.message}`;
+			navigator.clipboard.writeText(shareUrl);
+			alert(`activated url: ${shareUrl}\nCopied to clipboard`);
+			setBrainShared(true);
+			setSharedBrainText("make brain private");
+		} catch (e) {
+			console.log("error", e);
+			alert("error");
+		}
+	}
+
 	return (
 		<div className="bg-black/98 text-amber-50">
 			<div className="">
@@ -29,11 +57,10 @@ export default function Dashboard() {
 							{/* todo: add onClick */}
 							<Button
 								variant="secondary"
-								text="share brain"
+								text={shareBrainText}
+								loading={brainShared}
 								startIcon={ShareIcon()}
-								onClick={() => {
-									() => {};
-								}}
+								onClick={() => getURL()}
 							/>
 							<Button
 								variant="primary"
@@ -45,30 +72,10 @@ export default function Dashboard() {
 							/>
 						</div>
 					</div>
-
 					<div className="flex flex-wrap gap-4 max-w-full">
-						<Card
-							title="hello"
-							link="https://www.youtube.com/embed/LdPp6ikd3Qw?si=xTGqjf802-uzA6cI"
-							type="youtube"
-						/>
-						<Card title="hello" link="https://www.youtube.com/embed/8nX9P3Is8N8" type="youtube" />
-						<Card
-							title="hello"
-							link="https://www.youtube.com/watch?v=PvLz5kCVIss&list=RDPvLz5kCVIss&start_radio=1"
-							type="youtube"
-						/>
-						<Card
-							title="hello"
-							link="https://twitter.com/positronx_/status/1994904729072406835"
-							type="twitter"
-						/>
-						<Card
-							title="hello"
-							link="https://x.com/memoizedk/status/1994689820493509088"
-							type="twitter"
-						/>
-						<Card title="hello" link="https://x.com/purusa0x6c/status/1995049799318680004" type="twitter" />
+						{contents?.map(({ title, link, type }, index) => (
+							<Card key={index} title={title} link={link} type={type} />
+						))}
 					</div>
 				</div>
 			</div>
