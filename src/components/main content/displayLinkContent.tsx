@@ -3,6 +3,8 @@ export default function DisplayLinkContent({
     link,
     type,
 }: Omit<CardType, "title">) {
+    if (!link) return null;
+    
     const linkType = {
         youtube: (
             <iframe
@@ -14,7 +16,7 @@ export default function DisplayLinkContent({
                 allowFullScreen
             ></iframe>
         ),
-        twitter: (
+        tweet: (
             <>
                 <blockquote className="twitter-tweet" data-theme="dark">
                     <a href={link.replace("x.com", "twitter.com")}></a>

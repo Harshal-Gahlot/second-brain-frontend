@@ -4,7 +4,7 @@ import DisplayLinkContent from "./displayLinkContent";
 export interface CardType {
     title: string;
     link: string;
-    type: "youtube" | "twitter";
+    type: "youtube" | "tweet";
 }
 const commonTopBarClass = "flex items-center justify-between text-gray-500 p-4";
 export default function Card({ title, link, type }: CardType) {
@@ -12,7 +12,7 @@ export default function Card({ title, link, type }: CardType) {
         <div className="bg-slate-900 rounded-md outline-1 outline-gray-200 w-84 min-h-60 max-h-fit overflow-hidden">
             <div
                 className={
-                    type === "twitter"
+                    type === "tweet"
                         ? commonTopBarClass + " pb-1.5"
                         : commonTopBarClass
                 }
@@ -26,7 +26,7 @@ export default function Card({ title, link, type }: CardType) {
                     <ShareIcon />
                 </div>
             </div>
-            <div className={type === "twitter" ? "px-2" : ""}>
+            <div className={type === "tweet" ? "px-2" : ""}>
                 <DisplayLinkContent link={link} type={type} />
             </div>
         </div>
